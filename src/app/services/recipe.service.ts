@@ -34,7 +34,7 @@ export class RecipeService {
         ),
         new Recipe(
             'Arepa',
-            'Universally available. Not as good as empanadas',
+            'Not as good as empanadas',
             // tslint:disable-next-line:max-line-length
             'https://images-gmi-pmc.edge-generalmills.com/e35e4572-73d3-4f88-8300-377b29e57c0f.jpg',
             [

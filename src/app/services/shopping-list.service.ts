@@ -28,6 +28,7 @@ export class ShoppingListService {
             if (this.ingredients[index].name === ingredient.name) {
                 this.ingredients[index].amount += ingredient.amount;
                 found = true;
+                break;
             }
         }
 
