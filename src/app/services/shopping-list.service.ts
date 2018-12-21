@@ -9,7 +9,7 @@ export class ShoppingListService {
 
     ingredientsChanged = new EventEmitter<Ingredient[]>();
     private ingredients: Ingredient[] = [
-        new Ingredient('Avocados', 5),
+        new Ingredient('Avocado', 5),
         new Ingredient('Harina P.A.N.', 10),
         new Ingredient('Olives', 15)
     ];
@@ -21,16 +21,28 @@ export class ShoppingListService {
     }
 
     addIngredient(ingredient: Ingredient): void {
-        this.ingredients.push(ingredient);
+
+        // check if ingredient already exists
+        let found = false;
+        for (let index = 0; index < this.ingredients.length; index++) {
+            if (this.ingredients[index].name === ingredient.name) {
+                this.ingredients[index].amount += ingredient.amount;
+                found = true;
+            }
+        }
+
+        // if doesn't exists add new one
+        if (!found) {
+            this.ingredients.push(ingredient);
+        }
+
         this.ingredientsChanged.emit(this.ingredients.slice());
     }
 
-    addIngredients(ingredients: Ingredient[]) {
-        // ingredients.map((ingredient: Ingredient) => {
-        //     this.addIngredient(ingredient);
-        // });
-
-        this.ingredients.push(...ingredients);
-        this.ingredientsChanged.emit(this.ingredients.slice());
+    // TODO: refactor to avoid emitting multiple events
+    addIngredients(ingredients: Ingredient[]): void {
+        ingredients.map((ingredient: Ingredient) => {
+            this.addIngredient(ingredient);
+        });
     }
 }
