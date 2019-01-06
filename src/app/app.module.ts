@@ -13,6 +13,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { BetterHighlightDirective } from './directives/better-highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { DropdownDirective } from './directives/dropdown.directive';
         ShoppingEditComponent,
         BetterHighlightDirective,
         UnlessDirective,
-        DropdownDirective
+        DropdownDirective,
+        RecipeStartComponent
     ],
     imports: [
         BrowserModule,

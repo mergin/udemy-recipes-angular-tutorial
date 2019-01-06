@@ -12,6 +12,7 @@ export class RecipeService {
     recipeSelected = new EventEmitter<Recipe>();
     private recipes: Recipe[] = [
         new Recipe(
+            2,
             'Hallaca',
             'Best. Christmas. Food. Ever.',
             // tslint:disable-next-line:max-line-length
@@ -23,6 +24,7 @@ export class RecipeService {
             ]
         ),
         new Recipe(
+            3,
             'Empanada',
             'What heaven is made of',
             // tslint:disable-next-line:max-line-length
@@ -33,6 +35,7 @@ export class RecipeService {
             ]
         ),
         new Recipe(
+            5,
             'Arepa',
             'Not as good as empanadas',
             // tslint:disable-next-line:max-line-length
@@ -49,6 +52,11 @@ export class RecipeService {
 
     getRecipes(): Recipe[] {
         return this.recipes.slice();
+    }
+
+    getRecipe(id: number): Recipe {
+        // return this.recipes[id];
+        return this.recipes.filter((recipe: Recipe) => id === recipe.id )[0];
     }
 
     addIngredientsToSpList(ingredients: Ingredient[]): void {
