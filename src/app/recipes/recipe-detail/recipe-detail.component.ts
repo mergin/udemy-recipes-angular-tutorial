@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 import { Recipe } from '@app/models/recipe.model';
 import { Ingredient } from '@app/models/ingredient.model';
 import { RecipeService } from '@app/services/recipe.service';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
     selector: 'app-recipe-detail',
@@ -15,10 +15,11 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
     recipe: Recipe;
     recipeId: number;
-    paramsSubscription: Subscription;
+    private paramsSubscription: Subscription;
 
     constructor(
         private recipeService: RecipeService,
+        private router: Router,
         private route: ActivatedRoute
     ) { }
 
@@ -37,6 +38,12 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
     addIngredientsToSpList(ingredients: Ingredient[]): void {
         this.recipeService.addIngredientsToSpList(ingredients);
+    }
+
+    // not used, is for demo purposes only
+    onEditRecipe() {
+        // this.router.navigate(['new'], { relativeTo: this.route });
+        this.router.navigate(['../', this.recipeId, 'edit'], { relativeTo: this.route });
     }
 
 }
