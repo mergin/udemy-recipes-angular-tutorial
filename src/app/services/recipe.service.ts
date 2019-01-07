@@ -56,7 +56,8 @@ export class RecipeService {
 
     getRecipe(id: number): Recipe {
         // return this.recipes[id];
-        return this.recipes.filter((recipe: Recipe) => id === recipe.id )[0];
+        // return this.recipes.filter((recipe: Recipe) => id === recipe.id )[0];
+        return this.recipes.find((recipe: Recipe) => id === recipe.id );
     }
 
     addIngredientsToSpList(ingredients: Ingredient[]): void {
