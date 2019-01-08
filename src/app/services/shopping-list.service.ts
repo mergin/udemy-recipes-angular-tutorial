@@ -1,13 +1,14 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Ingredient } from '@app/models/ingredient.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ShoppingListService {
 
-    ingredientsChanged = new EventEmitter<Ingredient[]>();
+    ingredientsChanged = new Subject<Ingredient[]>();
     private ingredients: Ingredient[] = [
         new Ingredient('Avocado', 5),
         new Ingredient('Harina P.A.N.', 10),
@@ -37,10 +38,10 @@ export class ShoppingListService {
             this.ingredients.push(ingredient);
         }
 
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
 
-    // TODO: refactor to avoid emitting multiple events
+    // TODO: refactor to avoid adding multiple times in observable
     addIngredients(ingredients: Ingredient[]): void {
         ingredients.map((ingredient: Ingredient) => {
             this.addIngredient(ingredient);
