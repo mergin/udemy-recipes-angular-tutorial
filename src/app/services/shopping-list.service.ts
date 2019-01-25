@@ -57,8 +57,15 @@ export class ShoppingListService {
     }
 
     // updates ingredient based on index
+    // BUG: does not check for duplicated ingredients
     updateIngredient(index: number, newIngredient: Ingredient) {
         this.ingredients[index] = newIngredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
+    // delete ingredient based on index
+    deleteIngredient(index: number): void {
+        this.ingredients.splice(index, 1);
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 }
