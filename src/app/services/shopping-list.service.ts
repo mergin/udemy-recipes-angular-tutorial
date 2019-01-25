@@ -19,8 +19,14 @@ export class ShoppingListService {
 
     constructor() { }
 
+    // returns copy of ingredients list
     getIngredients(): Ingredient[] {
         return this.ingredients.slice();
+    }
+
+    // return single ingredient
+    getIngredient(index: number): Ingredient {
+        return this.ingredients[index];
     }
 
     addIngredient(ingredient: Ingredient): void {
