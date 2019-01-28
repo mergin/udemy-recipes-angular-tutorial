@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Recipe } from '@app/models/recipe.model';
 import { Ingredient } from '@app/models/ingredient.model';
@@ -8,6 +9,8 @@ import { ShoppingListService } from './shopping-list.service';
     providedIn: 'root'
 })
 export class RecipeService {
+
+    recipesChanged = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = [
         new Recipe(
@@ -44,6 +47,18 @@ export class RecipeService {
                 new Ingredient('Avocado', 1),
                 new Ingredient('Chicken', 1)
             ]
+        ),
+        new Recipe(
+            7,
+            'Piña Colada',
+            'Awesome',
+            // tslint:disable-next-line:max-line-length
+            'https://www.elmejornido.com/sites/default/files/122175lrg.jpg',
+            [
+                new Ingredient('Pineapple', 1),
+                new Ingredient('Coconut', 1),
+                new Ingredient('Rum', 1)
+            ]
         )
     ];
 
@@ -62,4 +77,23 @@ export class RecipeService {
     addIngredientsToSpList(ingredients: Ingredient[]): void {
         this.shoppingListService.addIngredients(ingredients);
     }
+
+    // add recipe to list
+    addRecipe(recipe: Recipe): void {
+        this.recipes.push(recipe);
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    // update recipe on id
+    updateRecipe(id: number, newRecipe: Recipe): void {
+        const index = this.recipes.findIndex((recipe: Recipe) => id === recipe.id );
+        this.recipes[index] = newRecipe;
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    // update recipe on index
+    // updateRecipe(index: number, newRecipe: Recipe): void {
+    //     this.recipes[index] = newRecipe;
+    //     this.recipesChanged.next(this.recipes.slice());
+    // }
 }

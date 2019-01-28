@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { FormGroup, FormControl, FormArray, AbstractControl, Validators } from '@angular/forms';
 
 import { RecipeService } from '@app/services/recipe.service';
+import { Recipe } from '@app/models/recipe.model';
 
 @Component({
     selector: 'app-recipe-edit',
@@ -39,7 +40,21 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
     // form submit handler
     onSubmit(): void {
-        console.log(this.recipeForm);
+        // BUG: id collision
+        const newRecipe = new Recipe(
+            Math.floor(Math.random() * 1000) + 1,
+            this.recipeForm.value['name'],
+            this.recipeForm.value['description'],
+            this.recipeForm.value['imagePath'],
+            this.recipeForm.value['ingredients']
+        );
+
+        if (this.editMode) {
+            newRecipe.id = this.recipeId;
+            this.recipeService.updateRecipe(this.recipeId, newRecipe);
+        } else {
+            this.recipeService.addRecipe(newRecipe);
+        }
     }
 
     // add ingredient handler
