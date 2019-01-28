@@ -1,3 +1,130 @@
-<p>
-    recipe-edit works!
-</p>
+<div class="row">
+    <div class="col-xs-12">
+
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+
+            <!-- buttons -->
+            <div class="row">
+                <div class="col-xs-12 btn-toolbar">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                    <!-- <button type="" class="btn btn-success"></button> -->
+                </div>
+            </div>
+
+            <!-- name -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            formControlName="name"
+                            class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <!-- image path -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="imagePath">Image URL</label>
+                        <input
+                            type="text"
+                            name="imagePath"
+                            id="imagePath"
+                            formControlName="imagePath"
+                            class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <!-- image preview -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <img
+                        *ngIf="recipeForm.value.imagePath"
+                        [src]="recipeForm.value.imagePath"
+                        alt="Image preview"
+                        class="img-responsive">
+                </div>
+            </div>
+
+            <!-- description -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea
+                            type="text"
+                            name="description"
+                            id="description"
+                            formControlName="description"
+                            class="form-control"
+                            rows="6">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ingredients -->
+            <div class="row">
+                <div class="col-xs-12" formArrayName="ingredients">
+
+                    <div
+                        class="row ingredients-row"
+                        *ngFor="let ingredientCtrl of getControls(); let i = index"
+                        [formGroupName]="i">
+
+                        <!-- name -->
+                        <div class="col-xs-8">
+                            <!-- <label for="name">Ingredient Name</label> -->
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                formControlName="name"
+                                class="form-control">
+                        </div>
+
+                        <!-- amount -->
+                        <div class="col-xs-2">
+                            <!-- <label for="amount">Amount</label> -->
+                            <input
+                                type="number"
+                                name="amount"
+                                id="amount"
+                                formControlName="amount"
+                                class="form-control">
+                        </div>
+
+                        <!-- delete -->
+                        <div class="col-xs-2">
+                            <button type="" class="btn btn-danger">X</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- add ingredient button -->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button
+                                type="button"
+                                class="btn btn-success"
+                                (click)="onAddIngredient()">
+                                Add Ingredient
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
