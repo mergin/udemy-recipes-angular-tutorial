@@ -36,7 +36,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         this.paramsSubscription.unsubscribe();
     }
 
-    addIngredientsToSpList(ingredients: Ingredient[]): void {
+    // add ingredient to shopping list
+    onAddIngredientsToSpList(ingredients: Ingredient[]): void {
         this.recipeService.addIngredientsToSpList(ingredients);
     }
 
@@ -46,4 +47,10 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         this.router.navigate(['../', this.recipeId, 'edit'], { relativeTo: this.route });
     }
 
+    // delete selected recipe
+    onDeleteRecipe(id: number): void {
+        this.recipeService.deleteRecipe(id);
+        // this.router.navigate(['../'], { relativeTo: this.route });
+        this.router.navigate(['/recipes']);
+    }
 }

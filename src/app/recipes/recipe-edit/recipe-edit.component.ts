@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormGroup, FormControl, FormArray, AbstractControl, Validators } from '@angular/forms';
 
@@ -19,6 +19,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     private paramsSubscription: Subscription;
 
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
         private recipeService: RecipeService
     ) { }
@@ -55,6 +56,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         } else {
             this.recipeService.addRecipe(newRecipe);
         }
+
+        this.onCancel();
+    }
+
+    // form cancel handler
+    onCancel(): void {
+        this.router.navigate(['../'], { relativeTo: this.route });
     }
 
     // add ingredient handler
@@ -68,6 +76,11 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
                 ])
             })
         );
+    }
+
+    // remove ingredient handler
+    removeIngred(index: number) {
+        (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
     }
 
     // returns a list of ingredients form control from recipe

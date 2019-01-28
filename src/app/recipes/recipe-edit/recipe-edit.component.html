@@ -6,11 +6,18 @@
             <!-- buttons -->
             <div class="row">
                 <div class="col-xs-12 btn-toolbar">
+
+                    <!-- submit -->
                     <button
                         type="submit"
                         class="btn btn-success"
                         [disabled]="!recipeForm.valid">Save</button>
-                    <button type="button" class="btn btn-danger">Cancel</button>
+
+                    <!-- cancel -->
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="onCancel()">Cancel</button>
                     <!-- <button type="" class="btn btn-success"></button> -->
                 </div>
             </div>
@@ -106,7 +113,10 @@
 
                         <!-- delete -->
                         <div class="col-xs-2">
-                            <button type="button" class="btn btn-danger">X</button>
+                            <button
+                                type="button"
+                                class="btn btn-danger"
+                                (click)="removeIngred(i)">X</button>
                         </div>
                     </div>
 

@@ -91,6 +91,13 @@ export class RecipeService {
         this.recipesChanged.next(this.recipes.slice());
     }
 
+    // delete recipe on id
+    deleteRecipe(id: number): void {
+        const index = this.recipes.findIndex((recipe: Recipe) => id === recipe.id );
+        this.recipes.splice(index, 1);
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
     // update recipe on index
     // updateRecipe(index: number, newRecipe: Recipe): void {
     //     this.recipes[index] = newRecipe;
