@@ -16,6 +16,8 @@ import { UnlessDirective } from './directives/unless.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { ShortenPipe } from './pipes/shorten.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
     declarations: [
@@ -31,7 +33,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
         UnlessDirective,
         DropdownDirective,
         RecipeStartComponent,
-        RecipeEditComponent
+        RecipeEditComponent,
+        ShortenPipe,
+        FilterPipe
     ],
     imports: [
         BrowserModule,
