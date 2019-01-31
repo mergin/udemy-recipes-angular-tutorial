@@ -44,4 +44,9 @@ export class AuthService {
             );
         return this.token;
     }
+
+    // check authentication status
+    isAuthenticated(): boolean {
+        return this.token != null;
+    }
 }

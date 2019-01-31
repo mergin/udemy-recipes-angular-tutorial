@@ -13,11 +13,17 @@
                 <li routerLinkActive="active"><a [routerLink]="['/shopping-list']">Shopping List</a></li>
             </ul>
 
-            <!-- right side dropdown -->
+            <!-- right side -->
             <ul class="nav navbar-nav navbar-right">
-                <li><a [routerLink]="['/signup']">Register</a></li>
-                <li><a [routerLink]="['/signin']">Login</a></li>
-                <li appDropdown class="dropdown">
+
+                <!-- register / login -->
+                <ng-container *ngIf="!authService.isAuthenticated()">
+                    <li><a [routerLink]="['/signup']">Register</a></li>
+                    <li><a [routerLink]="['/signin']">Login</a></li>
+                </ng-container>
+
+                <!-- dropdown -->
+                <li appDropdown class="dropdown" *ngIf="authService.isAuthenticated()">
                     <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a (click)="onSaveData()" style="cursor: pointer;">Save Data</a></li>

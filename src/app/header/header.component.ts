@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '@app/services/data-storage.service';
 import { RecipeService } from '@app/services/recipe.service';
 import { Recipe } from '@app/models/recipe.model';
+import { AuthService } from '@app/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         private dataStorageService: DataStorageService,
-        private recipeService: RecipeService
+        private recipeService: RecipeService,
+        public authService: AuthService
     ) { }
 
     ngOnInit() {
