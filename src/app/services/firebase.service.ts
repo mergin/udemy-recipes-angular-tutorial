@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, map } from 'rxjs/operators';
 import { Recipe } from '@app/models/recipe.model';
 import { RecipeService } from './recipe.service';
 
@@ -21,6 +21,18 @@ export class FirebaseService {
     getRecipes(): Observable<Recipe[]> {
         return this.http.get<Recipe[]>(`${this.serverURL}/recipes.json`)
             .pipe(
+                map(
+                    (recipes: Recipe[]) => {
+
+                        // makes sure all recipes have the ingredients attribute
+                        for (const recipe of recipes) {
+                            if (!recipe['ingredients']) {
+                                recipe['ingredients'] = [];
+                            }
+                        }
+                        return recipes;
+                    }
+                ),
                 retry(2),
                 catchError(this.handleError)
             );
