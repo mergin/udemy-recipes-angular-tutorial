@@ -7,6 +7,8 @@ import 'firebase/auth';
 })
 export class AuthService {
 
+    private token: string;
+
     constructor() { }
 
     // sign up
@@ -21,10 +23,25 @@ export class AuthService {
     signinUser(email: string, password: string): void {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(
-                response => console.log(response)
+                response => {
+                    firebase.auth().currentUser.getIdToken()
+                        .then(
+                            (token: string) => this.token = token
+                        );
+                }
             )
             .catch(
                 error => console.log(error)
             );
+    }
+
+    // returns user token
+    // BUG: might return expired token
+    getToken(): string {
+        firebase.auth().currentUser.getIdToken()
+            .then(
+                (token: string) => this.token = token
+            );
+        return this.token;
     }
 }

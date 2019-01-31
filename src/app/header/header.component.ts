@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FirebaseService } from '@app/services/firebase.service';
+import { DataStorageService } from '@app/services/data-storage.service';
 import { RecipeService } from '@app/services/recipe.service';
 import { Recipe } from '@app/models/recipe.model';
 
@@ -12,7 +12,7 @@ import { Recipe } from '@app/models/recipe.model';
 export class HeaderComponent implements OnInit {
 
     constructor(
-        private firebaseService: FirebaseService,
+        private dataStorageService: DataStorageService,
         private recipeService: RecipeService
     ) { }
 
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
     // save recipes in backend
     onSaveData(): void {
-        this.firebaseService.saveRecipes()
+        this.dataStorageService.saveRecipes()
             .subscribe(
                 (response: Recipe[]) => {
                     console.log('PUT: ', response);
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
     // fetch recipes from backend
     onFetchData(): void {
-        this.firebaseService.getRecipes()
+        this.dataStorageService.getRecipes()
             .subscribe(
                 (recipes: Recipe[]) => {
                     console.log('GET: ', recipes);

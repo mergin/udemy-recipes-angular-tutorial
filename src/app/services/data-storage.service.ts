@@ -1,25 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
+
 import { Recipe } from '@app/models/recipe.model';
 import { RecipeService } from './recipe.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FirebaseService {
+export class DataStorageService {
 
     private serverURL = 'https://udemy-recipes-angular-tutorial.firebaseio.com';
 
     constructor(
         private http: HttpClient,
-        private recipeService: RecipeService
+        private recipeService: RecipeService,
+        private authService: AuthService
     ) { }
 
     // retrieve recipe list
     getRecipes(): Observable<Recipe[]> {
-        return this.http.get<Recipe[]>(`${this.serverURL}/recipes.json`)
+
+        const token = this.authService.getToken();
+        const options = { params: new HttpParams().set('auth', token) };
+
+        return this.http.get<Recipe[]>(`${this.serverURL}/recipes.json`, options)
             .pipe(
                 map(
                     (recipes: Recipe[]) => {
@@ -40,7 +47,11 @@ export class FirebaseService {
 
     // save recipe list
     saveRecipes(): Observable<Recipe[]> {
-        return this.http.put<Recipe[]>(`${this.serverURL}/recipes.json`, this.recipeService.getRecipes())
+
+        const token = this.authService.getToken();
+        const options = { params: new HttpParams().set('auth', token) };
+
+        return this.http.put<Recipe[]>(`${this.serverURL}/recipes.json`, this.recipeService.getRecipes(), options)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
