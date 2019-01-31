@@ -35,6 +35,12 @@ export class AuthService {
             );
     }
 
+    // logout
+    logout(): void {
+        firebase.auth().signOut();
+        this.token = null;
+    }
+
     // returns user token
     // BUG: might return expired token
     getToken(): string {

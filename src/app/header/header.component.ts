@@ -21,6 +21,11 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
     }
 
+    // logout user
+    onLogout(): void {
+        this.authService.logout();
+    }
+
     // save recipes in backend
     onSaveData(): void {
         this.dataStorageService.saveRecipes()
