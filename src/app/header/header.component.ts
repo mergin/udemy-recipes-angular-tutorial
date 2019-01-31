@@ -1,6 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { FirebaseService } from '@app/services/firebase.service';
 import { RecipeService } from '@app/services/recipe.service';
+import { Recipe } from '@app/models/recipe.model';
 
 @Component({
     selector: 'app-header',
@@ -9,18 +11,32 @@ import { RecipeService } from '@app/services/recipe.service';
 })
 export class HeaderComponent implements OnInit {
 
-    constructor(private recipeService: RecipeService) { }
+    constructor(
+        private firebaseService: FirebaseService,
+        private recipeService: RecipeService
+    ) { }
 
     ngOnInit() {
     }
 
     // save recipes in backend
     onSaveData(): void {
-        this.recipeService.saveRecipes();
+        this.firebaseService.saveRecipes()
+            .subscribe(
+                (response: Recipe[]) => {
+                    console.log('PUT: ', response);
+                }
+            );
     }
 
     // fetch recipes from backend
     onFetchData(): void {
-        this.recipeService.fetchRecipes();
+        this.firebaseService.getRecipes()
+            .subscribe(
+                (recipes: Recipe[]) => {
+                    console.log('GET: ', recipes);
+                    this.recipeService.setRecipes(recipes);
+                }
+            );
     }
 }

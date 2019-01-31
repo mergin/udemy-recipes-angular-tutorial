@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 import { Recipe } from '@app/models/recipe.model';
 import { Ingredient } from '@app/models/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
-import { FirebaseService } from './firebase.service';
 
 @Injectable({
     providedIn: 'root'
@@ -64,10 +63,16 @@ export class RecipeService {
     ];
 
     constructor(
-        private shoppingListService: ShoppingListService,
-        private firebaseService: FirebaseService,
+        private shoppingListService: ShoppingListService
     ) { }
 
+    // recipes setter
+    setRecipes(recipes: Recipe[]): void {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    // recipes getter
     getRecipes(): Recipe[] {
         return this.recipes.slice();
     }
@@ -100,28 +105,6 @@ export class RecipeService {
         const index = this.recipes.findIndex((recipe: Recipe) => id === recipe.id );
         this.recipes.splice(index, 1);
         this.recipesChanged.next(this.recipes.slice());
-    }
-
-    // fetch recipes from backend
-    fetchRecipes(): void {
-        this.firebaseService.getRecipes()
-            .subscribe(
-                (recipes: Recipe[]) => {
-                    console.log('GET: ', recipes);
-                    this.recipes = recipes;
-                    this.recipesChanged.next(this.recipes.slice());
-                }
-            );
-    }
-
-    // save recipes in backend
-    saveRecipes(): void {
-        this.firebaseService.saveRecipes(this.recipes)
-            .subscribe(
-                (response) => {
-                    console.log('PUT: ', response);
-                }
-            );
     }
 
     // update recipe on index

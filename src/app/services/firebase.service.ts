@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Recipe } from '@app/models/recipe.model';
+import { RecipeService } from './recipe.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,11 +12,14 @@ export class FirebaseService {
 
     private serverURL = 'https://udemy-recipes-angular-tutorial.firebaseio.com';
 
-    constructor(protected http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private recipeService: RecipeService
+    ) { }
 
     // retrieve recipe list
     getRecipes(): Observable<Recipe[]> {
-        return this.http.get<any>(`${this.serverURL}/recipes.json`)
+        return this.http.get<Recipe[]>(`${this.serverURL}/recipes.json`)
             .pipe(
                 retry(2),
                 catchError(this.handleError)
@@ -23,8 +27,8 @@ export class FirebaseService {
     }
 
     // save recipe list
-    saveRecipes(recipes: Recipe[]): Observable<any> {
-        return this.http.put<any>(`${this.serverURL}/recipes.json`, recipes)
+    saveRecipes(): Observable<Recipe[]> {
+        return this.http.put<Recipe[]>(`${this.serverURL}/recipes.json`, this.recipeService.getRecipes())
             .pipe(
                 retry(2),
                 catchError(this.handleError)
