@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { DataStorageService } from '@app/services/data-storage.service';
 import { RecipeService } from '@app/services/recipe.service';
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
     constructor(
         private dataStorageService: DataStorageService,
         private recipeService: RecipeService,
-        public authService: AuthService
+        public authService: AuthService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -24,6 +26,7 @@ export class HeaderComponent implements OnInit {
     // logout user
     onLogout(): void {
         this.authService.logout();
+        this.router.navigate(['/']);
     }
 
     // save recipes in backend
