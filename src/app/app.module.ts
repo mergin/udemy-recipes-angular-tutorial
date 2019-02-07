@@ -10,12 +10,12 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { BetterHighlightDirective } from './directives/better-highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
-import { DropdownDirective } from './directives/dropdown.directive';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { RecipesModule } from './recipes/recipes.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -25,7 +25,6 @@ import { RecipesModule } from './recipes/recipes.module';
         ShoppingEditComponent,
         BetterHighlightDirective,
         UnlessDirective,
-        DropdownDirective,
         ShortenPipe,
         FilterPipe,
         SignupComponent,
@@ -36,7 +35,8 @@ import { RecipesModule } from './recipes/recipes.module';
         HttpClientModule,
         FormsModule,
         RecipesModule,
-        AppRoutingModule
+        AppRoutingModule,
+        SharedModule
     ],
     providers: [],
     bootstrap: [AppComponent]
