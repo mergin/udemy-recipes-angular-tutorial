@@ -103,7 +103,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
             // populate form array if there are ingredients
             if (recipe['ingredients']) {
-                for (let ingredient of recipe.ingredients) {
+                for (const ingredient of recipe.ingredients) {
                     recipeIngredients.push(
                         new FormGroup({
                             'name': new FormControl(ingredient.name, Validators.required),

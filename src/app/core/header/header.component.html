@@ -17,12 +17,12 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <!-- register / login -->
-                <ng-container *ngIf="!authService.isAuthenticated()">
+                <ng-container *ngIf="!isAuthenticated()">
                     <li><a [routerLink]="['/signup']">Register</a></li>
                     <li><a [routerLink]="['/signin']">Login</a></li>
                 </ng-container>
 
-                <ng-container *ngIf="authService.isAuthenticated()">
+                <ng-container *ngIf="isAuthenticated()">
 
                     <!-- logout -->
                     <li><a (click)="onLogout()" style="cursor: pointer;">Logout</a></li>

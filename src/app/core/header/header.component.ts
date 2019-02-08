@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     constructor(
         private dataStorageService: DataStorageService,
         private recipeService: RecipeService,
-        public authService: AuthService,
+        private authService: AuthService,
         private router: Router
     ) { }
 
@@ -48,5 +48,9 @@ export class HeaderComponent implements OnInit {
                     this.recipeService.setRecipes(recipes);
                 }
             );
+    }
+
+    isAuthenticated(): boolean {
+        return this.authService.isAuthenticated();
     }
 }
