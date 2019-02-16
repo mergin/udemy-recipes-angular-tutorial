@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AuthInterceptor } from '@app/shared/auth.interceptor';
+import { LoggingInterceptor } from '@app/shared/logging.interceptor';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { AuthInterceptor } from '@app/shared/auth.interceptor';
         HeaderComponent
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
     ]
 })
 export class CoreModule { }
