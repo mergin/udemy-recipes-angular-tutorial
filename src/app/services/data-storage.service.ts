@@ -33,7 +33,7 @@ export class DataStorageService {
             responseType: 'json' as 'json'
         };
 
-        return this.http.get<Recipe[]>(`${this.serverURL}/recipes.json`, options)
+        return this.http.get<Recipe[]>(`${this.serverURL}/recipes.json`)
             .pipe(
                 map(
                     (recipes: Recipe[]) => {
@@ -58,7 +58,7 @@ export class DataStorageService {
         const token = this.authService.getToken();
         const options = { params: new HttpParams().set('auth', token) };
 
-        return this.http.put<Recipe[]>(`${this.serverURL}/recipes.json`, this.recipeService.getRecipes(), options)
+        return this.http.put<Recipe[]>(`${this.serverURL}/recipes.json`, this.recipeService.getRecipes())
             .pipe(
                 retry(2),
                 catchError(this.handleError)
