@@ -24,7 +24,14 @@ export class DataStorageService {
     getRecipes(): Observable<Recipe[]> {
 
         const token = this.authService.getToken();
-        const options = { params: new HttpParams().set('auth', token) };
+
+        // added observe and responseType default values as an example
+        // casting is necessary for typescript type inference
+        const options = {
+            params: new HttpParams().set('auth', token),
+            observe: 'body' as 'body',
+            responseType: 'json' as 'json'
+        };
 
         return this.http.get<Recipe[]>(`${this.serverURL}/recipes.json`, options)
             .pipe(
