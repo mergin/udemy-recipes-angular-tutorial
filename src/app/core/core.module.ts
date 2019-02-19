@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HeaderComponent } from './header/header.component';
@@ -26,4 +26,12 @@ import { LoggingInterceptor } from '@app/shared/logging.interceptor';
         { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
     ]
 })
-export class CoreModule { }
+export class CoreModule {
+
+    constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+        if (parentModule) {
+            throw new Error(
+                'CoreModule is already loaded. Import it in the AppModule only');
+        }
+    }
+}
