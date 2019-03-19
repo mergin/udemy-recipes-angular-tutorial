@@ -14,6 +14,7 @@ import { Recipe } from '@app/models/recipe.model';
 export class RecipeEditComponent implements OnInit, OnDestroy {
 
     recipeId: number;
+    // tslint:disable-next-line:no-inferrable-types
     editMode: boolean = false;
     recipeForm: FormGroup;
     private paramsSubscription: Subscription;
@@ -93,7 +94,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         let recipeName = '';
         let recipeImagePath = '';
         let recipeDescription = '';
-        let recipeIngredients = new FormArray([]);
+        const recipeIngredients = new FormArray([]);
 
         if (this.editMode) {
             const recipe = this.recipeService.getRecipe(this.recipeId);

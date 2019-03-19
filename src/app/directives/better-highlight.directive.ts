@@ -8,7 +8,9 @@ import { Directive, OnInit, Input, HostBinding, HostListener } from '@angular/co
 })
 export class BetterHighlightDirective implements OnInit {
 
+    // tslint:disable-next-line:no-inferrable-types
     @Input() defaultColor: string = 'transparent';
+    // tslint:disable-next-line:no-inferrable-types
     @Input('appBetterHighlight') highlightColor: string = 'pink';
     @HostBinding('style.backgroundColor') backgroundColor: string;
 
