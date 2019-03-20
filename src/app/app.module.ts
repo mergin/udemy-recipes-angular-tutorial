@@ -22,7 +22,7 @@ import { CoreModule } from './core/core.module';
         FilterPipe
     ],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'udemy-recipes-angular-tutorial' }),
         HttpClientModule,
         ShoppingListModule,
         AuthModule,
