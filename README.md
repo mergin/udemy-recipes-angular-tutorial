@@ -16,13 +16,25 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ### Build ALternatives
 
-For production **browser** `npm run build-browser`
+For production **browser**
+```bash
+npm run build-browser
+```
 
-For production **server** `npm run build-server`
+For production **server**
+```bash
+npm run build-server
+```
 
-For Angular Universal server `npm run webpack:server`
+For Angular Universal server
+```bash
+npm run webpack:server
+```
 
-To build everything, including Angular Universal server `npm run build-everything`
+To build everything, including Angular Universal server
+```bash
+npm run build-everything
+```
 
 ## Running unit tests
 
@@ -35,11 +47,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Run Angular Universal
 
 To build and run Angular Universal
-```
+```bash
 npm run build-everything
 ```
 And then
-```
+```bash
 npm run server
 ```
 
