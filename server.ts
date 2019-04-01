@@ -24,7 +24,7 @@ const DIST_FOLDER = join(process.cwd(), 'dist');
 // Our index.html we'll use as our template
 const template = readFileSync(join(DIST_FOLDER, 'udemy-recipes-angular-tutorial-browser', 'index.html')).toString();
 
-const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('.dist/udemy-recipes-angular-tutorial-server/main');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/udemy-recipes-angular-tutorial-server/main');
 
 app.engine('html', (_, options, callback) => {
     renderModuleFactory(AppServerModuleNgFactory, {

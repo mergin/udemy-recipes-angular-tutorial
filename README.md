@@ -14,6 +14,16 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+### Build ALternatives
+
+For production **browser** `npm run build-browser`
+
+For production **server** `npm run build-server`
+
+For Angular Universal server `npm run webpack:server`
+
+To build everything, including Angular Universal server `npm run build-everything`
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
@@ -21,6 +31,17 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Run Angular Universal
+
+To build and run Angular Universal
+```
+npm run build-everything
+```
+And then
+```
+npm run server
+```
 
 ## Further help
 
