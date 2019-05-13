@@ -4,15 +4,19 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build",
+        "prebuild": "npm run lint",
+        "build": "ng build --aot",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "build-browser": "ng build --prod --aot --subresourceIntegrity",
-        "build-server": "ng run udemy-recipes-angular-tutorial:server",
+        "prebuild:browser": "npm run lint",
+        "build:browser": "ng build --prod --aot --subresourceIntegrity",
+        "prebuild:server": "npm run lint",
+        "build:server": "ng run udemy-recipes-angular-tutorial:server",
         "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-        "build-everything": "npm run build-browser && npm run build-server && npm run webpack:server",
-        "server": "node dist/server.js"
+        "build:everything": "npm run build:browser && npm run build:server && npm run webpack:server",
+        "server": "node dist/server.js",
+        "check": "npm run lint && npm run build"
     },
     "private": true,
     "dependencies": {
